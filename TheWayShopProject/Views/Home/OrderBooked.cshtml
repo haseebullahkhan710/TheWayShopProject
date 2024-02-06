@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<!-- Start Order Booked Page -->
+
+<div class="container" style="text-align:center">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="color: #fff;">Order Booked</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p style="color: #000000;">Thank you for placing your order with us!</p>
+            <p style="color: #000000;">Your order has been successfully booked.</p>
+        </div>
+    </div>
+
+    <!-- Add your order details here -->
+    <div class="row">
+        <div class="col-md-12">
+            <h3 style="color: #fff;">Order Details:</h3>
+            @if (Session["myCart"] != null)
+            {
+                foreach (var item in (List<Product>)Session["myCart"])
+                {
+                    <!-- Display your order details for each item -->
+                    <p style="color: #000;">Product: @item.PRODUCT_NAME</p>
+                    <p style="color: #000;">Quantity: @item.PRO_QUANTITY</p>
+                    <p style="color: #000;">Price: Rs.@item.PRODUCT_SALEPRICE</p>
+                    <hr style="border-color: #fff;" />
+                }
+            }
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <a href="@Url.Action("IndexCustomer", "Home")" class="ml-auto btn hvr-hover">Continue Shopping</a>
+        </div>
+    </div>
+</div>
+
+<!-- End Order Booked Page -->
+
+<style>
+    /* Custom CSS for the red and black theme */
+    body {
+        background-color: #000;
+        color: #FF0000;
+    }
+
+    h2, h3, p {
+        color: #FF0000;
+    }
+
+    .btn-theme {
+        background-color: #FF0000;
+        border-color: #FF0000;
+        color: #000;
+    }
+
+        .btn-theme:hover {
+            background-color: #C00000;
+            border-color: #C00000;
+        }
+
+    /* Additional styles for the red and black theme */
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .container {
+        background-color: #900;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    .btn.hvr-hover {
+        background-color: #f00;
+        border-color: #f00;
+    }
+
+        .btn.hvr-hover:hover {
+            background-color: #c00;
+            border-color: #c00;
+        }
+
+    /* Additional styles for the Contact Us section */
+    .contact-box-main h2,
+    .contact-info-left h2,
+    .contact-form-right h2 {
+        color: #FF0000;
+    }
+</style>

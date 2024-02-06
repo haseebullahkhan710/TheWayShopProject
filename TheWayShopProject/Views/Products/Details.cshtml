@@ -1,0 +1,89 @@
+﻿@model TheWayShopProject.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container mt-5">
+    <h2 class="text-danger">Details</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="text-black">Product</h4>
+            <dl class="dl-horizontal">
+                <dt class="text-danger">
+                    @Html.DisplayNameFor(model => model.Category.CATEGORY1)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Category.CATEGORY1)
+                </dd>
+
+                <dt class="text-danger">
+                    @Html.DisplayNameFor(model => model.PRODUCT_NAME)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PRODUCT_NAME)
+                </dd>
+
+                <dt class="text-danger">
+                    @Html.DisplayNameFor(model => model.PRODUCT_DECRIPTION)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PRODUCT_DECRIPTION)
+                </dd>
+
+                <dt class="text-danger">
+                    @Html.DisplayNameFor(model => model.PRODUCT_PURCHASEPRICE)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PRODUCT_PURCHASEPRICE)
+                </dd>
+
+                <dt class="text-danger">
+                    @Html.DisplayNameFor(model => model.PRODUCT_SALEPRICE)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PRODUCT_SALEPRICE)
+                </dd>
+
+                <dt class="text-danger">
+                    @Html.DisplayNameFor(model => model.PRODUCT_PICTURE)
+                </dt>
+                <dd>
+                    <img height="100PX" width="100PX" src="@Url.Content(Model.PRODUCT_PICTURE)" alt="Item Picture" />
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+<div class="container mt-3">
+    <style>
+        .btn-primary {
+            background-color: red;
+            border-color: black;
+        }
+
+            .btn-primary:hover {
+                background-color: black;
+                border-color: red;
+            }
+
+        .btn-secondary {
+            background-color: black;
+            color: red;
+            border-color: red;
+        }
+
+            .btn-secondary:hover {
+                background-color: red;
+                color: black;
+            }
+    </style>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.PRODUCT_ID }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+    </p>
+
+</div>

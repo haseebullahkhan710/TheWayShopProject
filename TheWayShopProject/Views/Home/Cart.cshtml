@@ -1,0 +1,295 @@
+﻿@using TheWayShopProject.Models
+
+@{
+    int row = 0;
+    int totalQty = 0;
+    decimal totalBill = 0;
+
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+<!-- Start All Title Box -->
+<div class="all-title-box" style="background-color: #000; color: #FF0000;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Cart</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("DisplayProduct", "Home")"><strong>Shop</strong></a></li>
+                    <li class="breadcrumb-item active"><strong>Cart</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+<!-- Start Cart  -->
+<br />
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-main table-responsive table-danger table-hover">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Images</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Session["myCart"] != null)
+                            {
+                                foreach (var item in (List
+                                <Product>)Session["myCart"])
+                                {
+                                    <tr>
+                                        <td class="thumbnail-img">
+                                            <a href="#">
+                                                <img class="img-fluid" src="@Url.Content(item.PRODUCT_PICTURE)" alt="Picture" />
+                                            </a>
+                                        </td>
+                                        <td class="name-pr" style="color: #000;">
+                                            <a href="#">
+                                                <span>@item.PRODUCT_NAME</span>
+                                            </a>
+                                            <b><h4>@item.PRODUCT_DECRIPTION</h4></b>
+                                        </td>
+                                        <td class="price-pr">
+                                            <b><p>Rs.@item.PRODUCT_SALEPRICE</p></b>
+                                        </td>
+
+                                        <td class="quantity-box">
+                                            <a href="@Url.Action("MinusFromCart", "Home", new { RowNo = row })" class="btn btn-danger fa fa-minus"></a>
+                                            <b>@item.PRO_QUANTITY</b>
+                                            <a href="@Url.Action("PlusFromCart", "Home", new { RowNo = row })" class="btn btn-danger fa fa-plus"></a>
+                                        </td>
+
+                                        <td class="total-pr">
+                                            <b><p>Rs.@(decimal.Parse(item.PRODUCT_SALEPRICE.ToString()) * decimal.Parse(item.PRO_QUANTITY.ToString()))</p></b>
+                                        </td>
+                                        <td class="remove-pr">
+                                            <a href="@Url.Action("RemoveFromCart", "Home", new { RowNo = 0 })">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    row++;
+                                    totalQty += item.PRO_QUANTITY;
+                                    totalBill += decimal.Parse(item.PRODUCT_SALEPRICE.ToString()) * decimal.Parse(item.PRO_QUANTITY.ToString());
+                                }
+
+                                Session["totalAmount"] = totalBill;
+                            }
+
+
+
+                            @if (Session["myCart"] == null || row == 0)
+                            {
+                                <tr>
+                                    <td colspan="6" align="center">
+                                        <b style="color: red; font-size: large;">
+                                            Your Shopping Cart is Empty...!
+                                            <a href="@Url.Action("DisplayProduct", "Home")" class="btn btn-theme">Click here to Shop</a>
+                                        </b>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><b>Qty Total. @totalQty</b></td>
+                        <td><b>Rs.@totalBill</b></td>
+                        <td></td>
+                        </tfoot>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        @using (Html.BeginForm("PayNow", "Home"))
+        {
+            <div class="row my-5">
+                <div class="col-lg-8 col-sm-12">
+                    <div class="order-box" id="customerDetails">
+                        <h3 class="ml-auto font-weight-bold" style="color: black;">Customer Details!</h3>
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="ORDER_NAME" placeholder="Enter ORDER_NAME">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="ORDER_CONTACT" placeholder="Enter Your ORDER_CONTACT">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="ORDER_EMAIL" placeholder="Enter Your ORDER_EMAIL">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="ORDER_ADDRESS" placeholder="Enter Your ORDER_ADDRESS">
+                            </div>
+                            <div class="form-group">
+                                <h4><b>Please Provide Correct Information</b></h4>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-12">
+                            <div class="order-box">
+                                <h3 class="ml-auto font-weight-bold" style="color: black;">Order summary</h3>
+                                <div class="d-flex">
+                                    <h4 style="color: black;">Sub Total</h4>
+                                    <div class="ml-auto font-weight-bold" style="color: black;"> Rs.@totalBill </div>
+                                </div>
+                                <div class="d-flex">
+                                    <h4 style="color: black;">Discount</h4>
+                                    <div class="ml-auto font-weight-bold" style="color: black;">Rs.0.00 </div>
+                                </div>
+                                <hr class="my-1">
+                                <div class="d-flex">
+                                    <h4 style="color: black;">Coupon Discount</h4>
+                                    <div class="ml-auto font-weight-bold" style="color: black;"> Rs.0.00 </div>
+                                </div>
+                                <div class="d-flex">
+                                    <h4 style="color: black;">Tax</h4>
+                                    <div class="ml-auto font-weight-bold" style="color: black;"> Rs.0.00 </div>
+                                </div>
+                                <div class="d-flex">
+                                    <h4 style="color: black;">Shipping Cost</h4>
+                                    <div class="ml-auto font-weight-bold" style="color: black;"> Free </div>
+                                </div>
+                                <hr>
+                                <div class="d-flex gr-total">
+                                    <h5 style="color: black;">Grand Total</h5>
+                                    <div class="ml-auto h5" style="color: black;">  Rs.@totalBill </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+
+                <div class="col-12 d-flex shopping-box justify-content-end">
+                    <input type="submit" class="ml-auto btn hvr-hover" onclick="payNow()" value="PayNow" >
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+<!-- End Cart -->
+
+<style>
+    /* Custom CSS for the red and black theme */
+    body {
+        background-color: #000;
+        color: #FF0000;
+    }
+
+    .breadcrumb-item a {
+        color: #FF0000;
+    }
+
+    .table-main table {
+        color: #000;
+    }
+
+    .btn-theme {
+        background-color: #FF0000;
+        border-color: #FF0000;
+        color: #000;
+    }
+
+        .btn-theme:hover {
+            background-color: #C00000;
+            border-color: #C00000;
+        }
+
+    .coupon-box .btn {
+        background-color: #FF0000;
+        border-color: #FF0000;
+        color: #000;
+    }
+
+        .coupon-box .btn:hover {
+            background-color: #C00000;
+            border-color: #C00000;
+        }
+
+    /* Text styling */
+    h2, .breadcrumb-item strong, .name-pr a, .price-pr p, .quantity-box, .total-pr p, .remove-pr a, .coupon-box .form-control, .update-box input, .order-box h3, .order-box h4, .order-box .ml-auto, .gr-total h5, .gr-total .ml-auto {
+        color: #000;
+    }
+
+    p {
+        color: #000;
+    }
+
+    span {
+    }
+    /* Custom CSS for the red and black theme */
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .container {
+        background-color: #900;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    .btn.hvr-hover {
+        background-color: #f00;
+        border-color: #f00;
+    }
+
+        .btn.hvr-hover:hover {
+            background-color: #c00;
+            border-color: #c00;
+        }
+
+    /* Additional styles for the Contact Us section */
+    .contact-box-main h2,
+    .contact-info-left h2,
+    .contact-form-right h2 {
+        color: #FF0000;
+    }
+</style>
+
+<script type="text/javascript">
+    window.onload = function () {
+        window.scrollBy(0, 180)
+    }
+
+        function payNow() {
+            // Get the form inputs
+            var customerName = document.getElementById("customer_Name").value;
+            var customerPhone = document.getElementById("Customer_Phone_No").value;
+            var customerEmail = document.getElementById("customer_Email").value;
+            var customerAddress = document.getElementById("customer_Address").value;
+
+            // Check if any of the fields are empty
+            if (
+                customerName === "" ||
+                customerPhone === "" ||
+                customerEmail === "" ||
+                customerAddress === ""
+            ) {
+                alert("Please fill in all customer details.");
+            } else {
+                // If all fields are filled, proceed to checkout
+                // Replace this line with your actual checkout logic
+                window.location.href = "checkout.html";
+            }
+        }
+
+</script>

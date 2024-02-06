@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TheWayShopProject.Models.Admin>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="mb-5">
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-danger btn-lg" })
+</div>
+
+<br />
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ADMIN_NAME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ADMIN_EMAIL)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ADMIN_PASSWORD)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ADMIN_CONTACT)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ADMIN_ADDRESS)
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ADMIN_NAME)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ADMIN_EMAIL)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ADMIN_PASSWORD)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ADMIN_CONTACT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ADMIN_ADDRESS)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ADMIN_ID }, new { @class = "btn btn-warning" })
+                        <i class="fa fa-edit"></i> | <!-- Edit icon -->
+
+                        @Html.ActionLink("Details", "Details", new { id = item.ADMIN_ID }, new { @class = "btn btn-info" })
+                        <i class="fa fa-info-circle"></i> | <!-- Details icon -->
+
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ADMIN_ID }, new { @class = "btn btn-danger" })
+                        <i class="fa fa-trash"></i> <!-- Delete icon -->
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

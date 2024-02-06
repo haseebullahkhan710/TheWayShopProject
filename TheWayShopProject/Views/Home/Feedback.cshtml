@@ -1,0 +1,85 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<!-- Start All Title Box -->
+<div class="all-title-box" style="background-color: #000; color: #FF0000;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2><strong>Feedback</strong></h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#"><strong>Home</strong></a></li>
+                    <li class="breadcrumb-item"><a href="about.html"><strong>About Us</strong></a></li>
+                    <li class="breadcrumb-item active"><strong>Feedback</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+<!-- Start Feedback Form -->
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h3><strong>Your Feedback</strong></h3>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="name"><strong>Name:</strong></label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email"><strong>Email:</strong></label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message"><strong>Message:</strong></label>
+                    <textarea class="form-control" rows="5" id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger"><strong>Submit Feedback</strong></button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Feedback Form -->
+<br />
+
+<!-- Include Bootstrap CSS link here -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    /* Custom CSS for the red and black theme */
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .container {
+        background-color: #900;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    .btn-primary {
+        background-color: #f00;
+        border-color: #f00;
+    }
+
+        .btn-primary:hover {
+            background-color: #c00;
+            border-color: #c00;
+        }
+
+    .form-signin {
+        margin-top: 20px;
+    }
+    /* Add more custom styles as needed */
+</style>
+
+<!-- Include Bootstrap JS and jQuery scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<!-- Bootstrap 4 requires Popper.js for dropdowns, tooltips, and popovers -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

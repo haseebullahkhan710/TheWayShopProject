@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>@ViewBag.Title</title>
+        <!-- Include Bootstrap CSS link here -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            /* Custom CSS for the red and black theme */
+            body {
+                background-color: #000;
+                color: #fff;
+            }
+
+            .container {
+                background-color: #900;
+                border-radius: 10px;
+                padding: 20px;
+                margin-top: 50px;
+            }
+
+            .btn-primary {
+                background-color: #f00;
+                border-color: #f00;
+            }
+
+                .btn-primary:hover {
+                    background-color: #c00;
+                    border-color: #c00;
+                }
+
+            .form-signin {
+                margin-top: 20px;
+            }
+            /* Add more custom styles as needed */
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 offset-md-4">
+                    <h2 class="text-center">Login</h2>
+                    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                    {
+                        <p class="text-danger">@ViewBag.ErrorMessage</p>
+                    }
+                    <form method="post" action="@Url.Action("Login", "Home")" class="form-signin">
+                        <label for="username" class="sr-only">Username:</label>
+                        <input type="text" id="username" name="ADMIN_NAME" class="form-control" placeholder="Username" required autofocus>
+                        <br>
+                        <label for="password" class="sr-only">Password:</label>
+                        <input type="password" id="password" name="ADMIN_PASSWORD" class="form-control" placeholder="Password" required>
+                        <br>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Include Bootstrap JS and jQuery scripts -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <!-- Bootstrap 4 requires Popper.js for dropdowns, tooltips, and popovers -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
+}
